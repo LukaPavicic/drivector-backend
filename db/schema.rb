@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_210858) do
+ActiveRecord::Schema.define(version: 2020_02_29_184421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_02_26_210858) do
     t.string "username", default: "", null: false
     t.string "tmp_profile_link", default: "", null: false
     t.string "steam_profile_link", default: "", null: false
-    t.integer "age", null: false
+    t.integer "age", default: 0, null: false
     t.integer "jobs_completed", default: 0, null: false
     t.integer "money_earned", default: 0, null: false
     t.string "favorite_truck_brand", default: "", null: false
@@ -32,4 +32,21 @@ ActiveRecord::Schema.define(version: 2020_02_26_210858) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "vtcs", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.bigint "user_id"
+    t.text "description", default: "", null: false
+    t.integer "money_made", default: 0, null: false
+    t.integer "deliveries_completed", default: 0, null: false
+    t.integer "minimum_age_to_join", default: 1, null: false
+    t.string "main_color", default: "#27ae60", null: false
+    t.integer "total_km_driven", default: 0, null: false
+    t.integer "member_count", default: 0, null: false
+    t.integer "pricing_plan", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_vtcs_on_user_id"
+  end
+
+  add_foreign_key "vtcs", "users"
 end

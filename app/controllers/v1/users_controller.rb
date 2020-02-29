@@ -9,7 +9,7 @@ class V1::UsersController < ApplicationController
              status: 201
       return
     end
-    render json: user.errors,
+    render json: user.errors.messages,
            status: 400
   end
 
