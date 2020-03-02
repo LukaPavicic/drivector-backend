@@ -29,6 +29,15 @@ class V1::UsersController < ApplicationController
     render json: user, meta: { access_token: access_token }, status: 200
   end
 
+  def retrieve
+    user = User.find_by(id: params[:user_id])
+    if user.present?
+      render json: user, status: 200
+    else
+      render json: { "error_message": "User not found."}, status: 404
+    end
+  end
+
   def current_user_data
     render json: @current_user, status: 200
   end

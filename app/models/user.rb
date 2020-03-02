@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_one :vtc
+  has_one :user_joined_vtc
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :username, presence: true, uniqueness: { case_sensitive: false }

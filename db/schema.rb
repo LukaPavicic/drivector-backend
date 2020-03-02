@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_29_184421) do
+ActiveRecord::Schema.define(version: 2020_03_02_172812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "user_joined_vtcs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "vtc_id"
+    t.integer "permissions", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_joined_vtcs_on_user_id"
+    t.index ["vtc_id"], name: "index_user_joined_vtcs_on_vtc_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -48,5 +58,7 @@ ActiveRecord::Schema.define(version: 2020_02_29_184421) do
     t.index ["user_id"], name: "index_vtcs_on_user_id"
   end
 
+  add_foreign_key "user_joined_vtcs", "users"
+  add_foreign_key "user_joined_vtcs", "vtcs"
   add_foreign_key "vtcs", "users"
 end

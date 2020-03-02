@@ -1,4 +1,5 @@
 class V1::VtcsController < ApplicationController
+  before_action :authenticate_request
 
   def index
     vtcs = Vtc.all
@@ -21,7 +22,7 @@ class V1::VtcsController < ApplicationController
     if vtc.present?
       render json: vtc, status: 200
     else
-      render json: vtc.errors.messages, status: 400
+      render json: { "error_message": "VTC not found." }, status: 404
     end
   end
 
