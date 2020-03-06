@@ -5,7 +5,7 @@ FactoryBot.define do
     email {Faker::Internet.email}
     tmp_profile_link {Faker::Internet.url}
     steam_profile_link {Faker::Internet.url}
-    age {Faker::Number.number}
     password {Faker::Internet.password}
+    birth_date {Faker::Date.birthday(min_age: 18, max_age: 60)}
   end
 end

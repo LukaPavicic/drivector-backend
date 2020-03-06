@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     post 'users/login', to: 'users#login'
     get 'users/current_user', to: 'users#current_user_data'
     get 'users/:user_id', to: 'users#retrieve'
+    get 'users', to: "users#index"
     # Vtcs
     post 'vtcs/create', to: "vtcs#create"
     get 'vtcs', to: "vtcs#index"

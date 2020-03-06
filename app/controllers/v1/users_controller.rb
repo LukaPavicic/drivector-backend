@@ -1,6 +1,11 @@
 class V1::UsersController < ApplicationController
   skip_before_action :authenticate_request, only: [:login, :register]
 
+  def index
+    users = User.all
+    render json: users, status: 200
+  end
+
   def register
     user = User.new(user_params)
 
@@ -45,6 +50,6 @@ class V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :age, :tmp_profile_link, :steam_profile_link, :username)
+    params.require(:user).permit(:email, :password, :password_confirmation, :tmp_profile_link, :steam_profile_link, :username, :birth_date)
   end
 end

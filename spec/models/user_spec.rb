@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   context 'validation tests' do
-
     it { should validate_presence_of(:username)}
 
     it { should validate_presence_of(:email)}
@@ -10,5 +9,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:tmp_profile_link)}
 
     it { should validate_presence_of(:steam_profile_link)}
+
+    it { should validate_presence_of(:birth_date)}
   end
 end

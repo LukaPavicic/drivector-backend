@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_02_172812) do
+ActiveRecord::Schema.define(version: 2020_03_06_232759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2020_03_02_172812) do
     t.string "username", default: "", null: false
     t.string "tmp_profile_link", default: "", null: false
     t.string "steam_profile_link", default: "", null: false
-    t.integer "age", default: 0, null: false
     t.integer "jobs_completed", default: 0, null: false
     t.integer "money_earned", default: 0, null: false
     t.string "favorite_truck_brand", default: "", null: false
@@ -39,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_172812) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "birth_date"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
