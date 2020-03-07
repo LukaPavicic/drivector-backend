@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   concern :base_api do
     # Users
     post 'users/register', to: 'users#register'
@@ -14,6 +13,9 @@ Rails.application.routes.draw do
     # User Joined Vtcs
     get 'user_joined_vtcs', to: "user_joined_vtc#index"
     post 'user_joined_vtcs/create', to: "user_joined_vtc#create"
+    # Jobs
+    get 'jobs', to: "jobs#index"
+    post 'jobs/create', to: "jobs#create"
   end
 
   namespace :v1 do

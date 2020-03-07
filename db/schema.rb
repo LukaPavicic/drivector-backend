@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_232759) do
+ActiveRecord::Schema.define(version: 2020_03_07_134656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "jobs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "vtc_id"
+    t.integer "money_made", default: 0, null: false
+    t.integer "km_driven", default: 0, null: false
+    t.string "goods_type", default: "", null: false
+    t.string "from_city", default: "", null: false
+    t.string "to_city", default: "", null: false
+    t.string "from_company", default: "", null: false
+    t.string "to_company", default: "", null: false
+    t.float "damage", default: 0.0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_jobs_on_user_id"
+    t.index ["vtc_id"], name: "index_jobs_on_vtc_id"
+  end
 
   create_table "user_joined_vtcs", force: :cascade do |t|
     t.bigint "user_id"
@@ -58,6 +75,8 @@ ActiveRecord::Schema.define(version: 2020_03_06_232759) do
     t.index ["user_id"], name: "index_vtcs_on_user_id"
   end
 
+  add_foreign_key "jobs", "users"
+  add_foreign_key "jobs", "vtcs"
   add_foreign_key "user_joined_vtcs", "users"
   add_foreign_key "user_joined_vtcs", "vtcs"
   add_foreign_key "vtcs", "users"

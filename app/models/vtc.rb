@@ -1,6 +1,7 @@
 class Vtc < ApplicationRecord
   belongs_to :user
   has_many :user_joined_vtcs
+  has_many :jobs
 
   validates :name, presence: true, uniqueness: true, length: {minimum: 3, maximum: 35}
   validates :description, length: {minimum: 10, maximum: 255}
@@ -21,5 +22,9 @@ class Vtc < ApplicationRecord
 
   def increase_member_count
     self.member_count += 1
+  end
+
+  def decrease_member_count
+    self.member_count -= 1
   end
 end

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_one :vtc
   has_one :user_joined_vtc
+  has_many :jobs
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
