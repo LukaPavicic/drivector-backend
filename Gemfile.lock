@@ -215,6 +215,11 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stripe (5.17.0)
+    stripe-rails (1.9.1)
+      rails (>= 3)
+      responders
+      stripe (>= 1.36.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tzinfo (1.2.6)
@@ -254,6 +259,7 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
+  stripe-rails
   tzinfo-data
 
 RUBY VERSION

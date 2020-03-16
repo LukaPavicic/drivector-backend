@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     # Jobs
     get 'jobs', to: "jobs#index"
     post 'jobs/create', to: "jobs#create"
+    # Subscriptions
+    post 'subscription', to: "subscriptions#create"
   end
 
   namespace :v1 do
