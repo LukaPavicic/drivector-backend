@@ -16,4 +16,8 @@ class User < ApplicationRecord
     now = Time.now.utc.to_date
     now.year - self.birth_date.year - ((now.month > self.birth_date.month || (now.month == self.birth_date.month && now.day >= self.birth_date.day)) ? 0 : 1)
   end
+
+  def subscribed?
+    stripe_subscription_id?
+  end
 end
