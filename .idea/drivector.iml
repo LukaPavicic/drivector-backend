@@ -104,6 +104,7 @@
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.2.1, Remote: ruby-2.7.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="stripe (v5.17.0, Remote: ruby-2.7.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="stripe-rails (v1.9.1, Remote: ruby-2.7.0-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="stripe_event (v2.3.0, Remote: ruby-2.7.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.0.1, Remote: ruby-2.7.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thread_safe (v0.3.6, Remote: ruby-2.7.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v1.2.6, Remote: ruby-2.7.0-p0) [gem]" level="application" />

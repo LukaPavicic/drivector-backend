@@ -14,6 +14,7 @@ gem 'hirb'
 gem 'jwt'
 gem 'active_model_serializers'
 gem 'stripe-rails'
+gem 'stripe_event'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -220,6 +220,9 @@ GEM
       rails (>= 3)
       responders
       stripe (>= 1.36.2)
+    stripe_event (2.3.0)
+      activesupport (>= 3.1)
+      stripe (>= 2.8, < 6)
     thor (1.0.1)
     thread_safe (0.3.6)
     tzinfo (1.2.6)
@@ -260,6 +263,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   stripe-rails
+  stripe_event
   tzinfo-data
 
 RUBY VERSION

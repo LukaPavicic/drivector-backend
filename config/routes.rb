@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount StripeEvent::Engine, at: "/stripe/webhook"
   concern :base_api do
     # Users
     post 'users/register', to: 'users#register'
