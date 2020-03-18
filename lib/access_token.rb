@@ -1,6 +1,7 @@
 class AccessToken
   class << self
     def encode(payload)
+      p payload
       exp = 1.day.from_now
       payload[:exp] = exp.to_i
       key = Rails.application.secrets.secret_key_base
