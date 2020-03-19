@@ -4,7 +4,9 @@ class V1::UserSerializer < ActiveModel::Serializer
   has_one :user_joined_vtc
 
   def user_joined_vtc
-    Vtc.find_by(id: object.user_joined_vtc.vtc_id)
+    if object.user_joined_vtc.vtc_id.present?
+      Vtc.find_by(id: object.user_joined_vtc.vtc_id)
+    end
   end
 
   def birth_date
