@@ -9,7 +9,7 @@ class AccessToken
     end
 
     def decode(token)
-      key = Rails.application.secrets.secret_key_base
+      key = Rails.env.production? ? ENV['SECRET_TOKEN'] : Rails.application.secrets.secret_key_base
       JWT.decode(token, key)
     end
 
