@@ -14,7 +14,7 @@ class V1::UsersController < ApplicationController
              status: 201
       return
     end
-    render json: user.errors.messages,
+    render json: user.errors.full_messages,
            status: 400
   end
 
