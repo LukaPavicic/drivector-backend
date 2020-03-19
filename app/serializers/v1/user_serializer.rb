@@ -4,10 +4,10 @@ class V1::UserSerializer < ActiveModel::Serializer
   has_one :user_joined_vtc
 
   def user_joined_vtc
-    if object.user_joined_vtcs.length == 1
-      Vtc.find_by(id: object.user_joined_vtc.id)
-    else
+    if object.user_joined_vtc.nil?
       nil
+    else
+      Vtc.find_by(id: object.user_joined_vtc.id)
     end
   end
 
