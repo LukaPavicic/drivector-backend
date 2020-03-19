@@ -4,7 +4,7 @@ class AccessToken
       exp = 1.day.from_now
       print "Payload"
       payload[:exp] = exp.to_i
-      key = Rails.application.secrets.secret_key_base
+      key = Rails.env.production? ? ENV['SECRET_TOKEN'] : Rails.application.secrets.secret_key_base
       JWT.encode(payload, key)
     end
 
