@@ -11,6 +11,11 @@ class V1::VtcsController < ApplicationController
     vtc.user_id = @current_user.id
 
     if vtc.valid? && vtc.save
+      # VTC Permissions:
+      # 1 - member
+      # 2 - moderator
+      # 3 - admin
+      UserJoinedVtc.create(user_id: @current_user.id, vtc_id: vtc.id, permissions: 3)
       render json: vtc, status: 201
     else
       render json: vtc.errors.messages, status: 400
@@ -28,6 +33,6 @@ class V1::VtcsController < ApplicationController
 
   private
   def vtc_params
-    params.require(:vtc).permit(:id, :name, :description, :minimum_age_to_join, :main_color, :pricing_plan)
+    params.require(:vtc).permit(:id, :name, :description, :minimum_age_to_join, :main_color)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_203258) do
+ActiveRecord::Schema.define(version: 2020_03_19_133815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2020_03_18_203258) do
     t.integer "card_expiration_month"
     t.integer "card_expiration_year"
     t.string "card_brand"
+    t.integer "subscription_type", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -109,9 +110,9 @@ ActiveRecord::Schema.define(version: 2020_03_18_203258) do
     t.string "main_color", default: "#27ae60", null: false
     t.integer "total_km_driven", default: 0, null: false
     t.integer "member_count", default: 0, null: false
-    t.integer "pricing_plan", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "pricing_plan", default: 0, null: false
     t.index ["user_id"], name: "index_vtcs_on_user_id"
   end
 
