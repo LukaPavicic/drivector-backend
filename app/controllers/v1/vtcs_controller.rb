@@ -9,7 +9,7 @@ class V1::VtcsController < ApplicationController
   def create
     vtc = Vtc.new(vtc_params)
     vtc.user_id = @current_user.id
-
+    vtc.increase_member_count
     if vtc.valid? && vtc.save
       # VTC Permissions:
       # 1 - member
