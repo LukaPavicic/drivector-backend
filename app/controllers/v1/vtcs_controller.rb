@@ -22,6 +22,19 @@ class V1::VtcsController < ApplicationController
     end
   end
 
+  def update_socials
+    vtc = Vtc.find_by(id: params[:vtc_id])
+    if (@current_user.user_joined_vtc.permissions == 3 || @current_user.user_joined_vtc.permissions == 2) && @current_user.user_joined_vtc.vtc_id == vtc.id
+      if vtc.update(vtc_socials_params)
+        render json: vtc, status: 200
+      else
+        render json: {"message": "Something went wrong. Try again later."}, status: 400
+      end
+    else
+      render json: {"message": "You are not allowed to do that"}, status: 403
+    end
+  end
+
   def retrieve
     vtc = Vtc.find_by(id: params[:vtc_id])
     if vtc.present?
@@ -34,5 +47,9 @@ class V1::VtcsController < ApplicationController
   private
   def vtc_params
     params.require(:vtc).permit(:id, :name, :description, :minimum_age_to_join, :main_color)
+  end
+
+  def vtc_socials_params
+    params.require(:vtc).permit(:twitter_link, :youtube_link, :discord_link, :facebook_link, :instagram_link, :twitch_link)
   end
 end
