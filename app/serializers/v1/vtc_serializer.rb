@@ -21,4 +21,5 @@ class V1::VtcSerializer < ActiveModel::Serializer
   )
   attribute :user_id, key: :owner
   belongs_to :user
+  has_many :user_joined_vtcs
 end

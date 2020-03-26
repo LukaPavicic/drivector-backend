@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get 'vtcs', to: "vtcs#index"
     get 'vtcs/:vtc_id', to: "vtcs#retrieve"
     post 'vtcs/:vtc_id/update_socials', to: "vtcs#update_socials"
+    get 'vtcs/:vtc_id/retrieve_employees', to: "vtcs#retrieve_employees"
     # User Joined Vtcs
     get 'user_joined_vtcs', to: "user_joined_vtc#index"
     post 'user_joined_vtcs/create', to: "user_joined_vtc#create"

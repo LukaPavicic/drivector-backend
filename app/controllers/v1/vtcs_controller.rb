@@ -22,6 +22,12 @@ class V1::VtcsController < ApplicationController
     end
   end
 
+  def retrieve_employees
+    vtc = Vtc.find_by(id: params[:vtc_id])
+    employees = UserJoinedVtc.where(vtc_id: vtc.id).all
+    render json: employees, status: 200
+  end
+
   def update_socials
     vtc = Vtc.find_by(id: params[:vtc_id])
     if (@current_user.user_joined_vtc.permissions == 3 || @current_user.user_joined_vtc.permissions == 2) && @current_user.user_joined_vtc.vtc_id == vtc.id
