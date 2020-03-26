@@ -9,6 +9,16 @@ class V1::VtcsController < ApplicationController
   def create
     vtc = Vtc.new(vtc_params)
     vtc.user_id = @current_user.id
+    vtc.pricing_plan = @current_user.subscription_type
+    if @current_user.subscription_type == 0
+      vtc.maximum_amount_of_users = 10
+    elsif @current_user.subscription_type == 1
+      vtc.maximum_amount_of_users = 30
+    elsif @current_user.subscription_type == 2
+      vtc.maximum_amount_of_users = 20000
+    else
+      vtc.maximum_amount_of_users = 0
+    end
     vtc.increase_member_count
     if vtc.valid? && vtc.save
       # VTC Permissions:

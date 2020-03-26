@@ -20,6 +20,5 @@ class V1::VtcSerializer < ActiveModel::Serializer
       :instagram_link
   )
   attribute :user_id, key: :owner
-  belongs_to :user
-  has_many :user_joined_vtcs
+  has_many :user_joined_vtcs, key: :members
 end

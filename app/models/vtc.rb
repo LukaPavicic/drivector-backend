@@ -2,6 +2,7 @@ class Vtc < ApplicationRecord
   belongs_to :user
   has_many :user_joined_vtcs
   has_many :jobs
+  has_many :join_requests
 
   validates :name, presence: true, uniqueness: true, length: {minimum: 3, maximum: 35}
   validates :description, length: {minimum: 10, maximum: 255}
