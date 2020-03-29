@@ -1,5 +1,6 @@
 class V1::VtcsController < ApplicationController
   before_action :authenticate_request
+  skip_before_action :authenticate_request, only: [:retrieve]
 
   def index
     vtcs = Vtc.all
