@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     post 'subscription', to: "subscriptions#create"
     # Join Requests
     post 'join_request/new', to: "join_requests#create"
+    get 'join_requests/vtc_requests', to: "join_requests#retrieve_for_vtc"
   end
 
   namespace :v1 do
