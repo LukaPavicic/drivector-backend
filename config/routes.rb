@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     post 'jobs/create', to: "jobs#create"
     # Subscriptions
     post 'subscription', to: "subscriptions#create"
+    # Join Requests
+    post 'join_request/new', to: "join_requests#create"
   end
 
   namespace :v1 do
