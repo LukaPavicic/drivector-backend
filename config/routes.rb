@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     # Join Requests
     post 'join_request/new', to: "join_requests#create"
     get 'join_requests/vtc_requests', to: "join_requests#retrieve_for_vtc"
+    post 'join_request/handle', to: "join_requests#handle_join_request"
   end
 
   namespace :v1 do

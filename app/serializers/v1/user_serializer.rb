@@ -1,5 +1,6 @@
 class V1::UserSerializer < ActiveModel::Serializer
-  attributes(:id, :email, :username, :tmp_profile_link, :steam_profile_link)
+  attributes(:id, :email, :username, :tmp_profile_link, :steam_profile_link, :money_earned, :jobs_completed)
+  attribute :created_at
   attribute :birth_date, key: :age
   has_one :user_joined_vtc
 

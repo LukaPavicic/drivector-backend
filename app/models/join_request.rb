@@ -7,10 +7,12 @@ class JoinRequest < ApplicationRecord
 
   def accept
     self.status = 1
+    self.save
   end
 
-  def reject(message)
+  def rejectJR(message)
     self.status = 2
     self.rejection_message = message
+    self.save
   end
 end
