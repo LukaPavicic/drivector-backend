@@ -2,8 +2,8 @@ class JoinRequest < ApplicationRecord
   belongs_to :user
   belongs_to :vtc
 
-  validates :vtc_id, presence: true
-  validates :user_id, presence: true, uniqueness: true
+  validates :vtc_id, presence: true, uniqueness: { scope: :user_id }
+  validates :user_id, presence: true, uniqueness: { scope: :vtc_id }
 
   def accept
     self.status = 1

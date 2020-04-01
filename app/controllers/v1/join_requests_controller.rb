@@ -2,10 +2,15 @@ class V1::JoinRequestsController < ApplicationController
   def create
     join_request = JoinRequest.new(join_request_params)
     join_request.user = @current_user
-    if join_request.save && join_request.valid?
-      render json: join_request, status: 201
+    user_active_requests = JoinRequest.where(user_id: @current_user.id, status: 0).all
+    if user_active_requests == 0
+      if join_request.save && join_request.valid?
+        render json: join_request, status: 201
+      else
+        render json: join_request.errors.full_messages, status: 400
+      end
     else
-      render json: join_request.errors.full_messages, status: 400
+      render json: {"message": "You already have an active join request."}, status: 200
     end
   end
 
