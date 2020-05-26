@@ -3,11 +3,24 @@ class V1::JoinRequestsController < ApplicationController
     join_request = JoinRequest.new(join_request_params)
     join_request.user = @current_user
     user_active_requests = JoinRequest.where(user_id: @current_user.id, status: 0).all
-    if user_active_requests == 0
-      if join_request.save && join_request.valid?
-        render json: join_request, status: 201
+    same_request = JoinRequest.where(user_id: @current_user, vtc_id: params[:join_request][:vtc_id]).first
+    if user_active_requests.length == 0
+      if same_request.present?
+        if same_request.can_submit_again?
+          if join_request.save && join_request.valid?
+            render json: join_request, status: 201
+          else
+            render json: join_request.errors.full_messages, status: 400
+          end
+        else
+          render json: {"message": "You already sent a request to this VTC in the past 7 days."}, status: 400
+        end
       else
-        render json: join_request.errors.full_messages, status: 400
+        if join_request.save && join_request.valid?
+          render json: join_request, status: 201
+        else
+          render json: join_request.errors.full_messages, status: 400
+        end
       end
     else
       render json: {"message": "You already have an active join request."}, status: 200
