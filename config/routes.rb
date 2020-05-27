@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     get 'user_joined_vtcs', to: "user_joined_vtc#index"
     post 'user_joined_vtcs/create', to: "user_joined_vtc#create"
     delete 'user_joined_vtcs/kick', to: "user_joined_vtc#kick"
+    post 'user_joined_vtcs/promote', to: "user_joined_vtc#promote"
+    post 'user_joined_vtcs/demote', to: "user_joined_vtc#demote"
     # Jobs
     get 'jobs', to: "jobs#index"
     post 'jobs/create', to: "jobs#create"

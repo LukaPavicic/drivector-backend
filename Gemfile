@@ -15,6 +15,7 @@ gem 'jwt'
 gem 'active_model_serializers'
 gem 'stripe-rails'
 gem 'stripe_event'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
