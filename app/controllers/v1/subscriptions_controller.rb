@@ -30,12 +30,4 @@ class V1::SubscriptionsController < ApplicationController
       render json: customer, status: 200
     end
   end
-
-  def show
-
-  end
-
-  def destroy
-
-  end
 end

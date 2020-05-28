@@ -18,8 +18,7 @@ class V1::UserJoinedVtcController < ApplicationController
     # VTC Permissions:
     # 1 - member
     # 2 - moderator
-    # 3 - admin
-    # req_author = UserJoinedVtc.where(user_id: @current_user.id, vtc_id: params[:vtc_id]).first    
+    # 3 - admin    
     @user_to_kick = UserJoinedVtc.where(vtc_id: params[:vtc_id], user_id: params[:user_id]).first
     begin
       authorize @user_to_kick
