@@ -40,16 +40,17 @@ class V1::VtcsController < ApplicationController
   end
 
   def update_socials
-    vtc = Vtc.find_by(id: params[:vtc_id])
-    if (@current_user.user_joined_vtc.permissions == 3 || @current_user.user_joined_vtc.permissions == 2) && @current_user.user_joined_vtc.vtc_id == vtc.id
-      if vtc.update(vtc_socials_params)
-        render json: vtc, status: 200
+    @vtc = Vtc.find_by(id: params[:vtc_id])
+    begin 
+      authorize @vtc
+      if @vtc.update(vtc_socials_params)
+        render json: @vtc, status: 200
       else
         render json: {"message": "Something went wrong. Try again later."}, status: 400
       end
-    else
-      render json: {"message": "You are not allowed to do that"}, status: 403
-    end
+    rescue Pundit::NotAuthorizedError
+      render json: {"message": "You are not allowed to change VTCs socials."}, status: 403
+    end      
   end
 
   def retrieve

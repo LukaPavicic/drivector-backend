@@ -16,7 +16,7 @@ class V1::JobsController < ApplicationController
       job_vtc.save
       render json: job, status: 201
     else
-      render json: job.errors.messages, status: 400
+      render json: job.errors.full_messages, status: 400
     end
   end
 
@@ -27,6 +27,28 @@ class V1::JobsController < ApplicationController
     else
       render json: { "error_message": "Job not found"}, status: 404
     end
+  end
+
+  def daily_statistics
+    todays_jobs = Job.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).all
+    money_earned = 0
+    jobs_completed = todays_jobs.length
+    km_driven = 0
+    damages_sum = 0
+    todays_jobs.each do |job|
+      money_earned += job.money_made
+      km_driven += job.km_driven
+      damages_sum += job.damage
+    end
+    avg_damage = damages_sum / jobs_completed
+    data = { 
+      "jobs_completed": jobs_completed,
+      "km_driven": km_driven,
+      "money_earned": money_earned,
+      "average_damage": avg_damage
+    }
+
+    render json: data, status: 200
   end
 
   private
