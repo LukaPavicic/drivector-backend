@@ -1,4 +1,5 @@
 class V1::JobsController < ApplicationController
+
   def index
     jobs = Job.all
     render json: jobs, status: 200
@@ -30,8 +31,10 @@ class V1::JobsController < ApplicationController
   end
 
   def today_jobs 
-    todays_jobs = Job.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).all
-    render json: todays_jobs, status: 200
+    todays_jobs = Job.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).all.order('created_at DESC').page(params[:page] ? params[:page].to_i : 1).per(10)
+    
+    # paginate json: todays_jobs, per_page: 10
+    render json: {objects: ActiveModel::Serializer::CollectionSerializer.new(todays_jobs, each_serializer: V1::JobSerializer), meta: pagination_meta(todays_jobs)}
   end
 
   def daily_statistics
@@ -68,5 +71,11 @@ class V1::JobsController < ApplicationController
         :money_made,
         :goods_type
         )
+  end
+
+  def pagination_meta(object)
+    {
+      total_pages: object.total_pages
+    }
   end
 end

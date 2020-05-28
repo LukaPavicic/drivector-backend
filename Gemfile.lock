@@ -67,6 +67,7 @@ GEM
       rack-test (>= 1.1.0, < 2.0)
       rest-client (>= 2.0.2, < 3.0)
       rspec (~> 3.8)
+    api-pagination (4.8.2)
     bcrypt (3.1.13)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -109,6 +110,18 @@ GEM
       concurrent-ruby (~> 1.0)
     jsonapi-renderer (0.2.2)
     jwt (2.2.1)
+    kaminari (1.2.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.1)
+      kaminari-activerecord (= 1.2.1)
+      kaminari-core (= 1.2.1)
+    kaminari-actionview (1.2.1)
+      actionview
+      kaminari-core (= 1.2.1)
+    kaminari-activerecord (1.2.1)
+      activerecord
+      kaminari-core (= 1.2.1)
+    kaminari-core (1.2.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -245,6 +258,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   airborne
+  api-pagination
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
@@ -255,6 +269,7 @@ DEPENDENCIES
   faker
   hirb
   jwt
+  kaminari
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)

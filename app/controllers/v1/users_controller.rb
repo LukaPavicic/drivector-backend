@@ -44,7 +44,7 @@ class V1::UsersController < ApplicationController
   end
 
   def current_user_data
-    render json: @current_user, status: 200
+    render json: @current_user, each_serializer: V1::UserSerializer, status: 200
   end
 
   private
