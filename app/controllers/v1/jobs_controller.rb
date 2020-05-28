@@ -29,6 +29,11 @@ class V1::JobsController < ApplicationController
     end
   end
 
+  def today_jobs 
+    todays_jobs = Job.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).all
+    render json: todays_jobs, status: 200
+  end
+
   def daily_statistics
     todays_jobs = Job.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).all
     money_earned = 0
