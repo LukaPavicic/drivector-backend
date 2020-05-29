@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     post 'jobs/create', to: "jobs#create"
     get 'jobs/daily_stats', to: "jobs#daily_statistics"
     get 'jobs/today', to: "jobs#today_jobs"
+    get 'jobs/vtc', to: "jobs#vtc_jobs"
+    get 'jobs/all_time_stats', to: "jobs#all_time_statistics"
     # Subscriptions
     post 'subscription', to: "subscriptions#create"
     # Join Requests

@@ -2,7 +2,7 @@ class UserJoinedVtc < ApplicationRecord
   belongs_to :user
   belongs_to :vtc
 
-  validates :user, presence: true, uniqueness: { scope: :vtc}
-  validates :vtc, presence: true, uniqueness: { scope: :user }
+  validates :user, presence: true, uniqueness: true  
+  validates :vtc, presence: true
   validates :permissions, presence: true
 end

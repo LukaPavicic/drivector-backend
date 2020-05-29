@@ -31,14 +31,14 @@ class V1::JobsController < ApplicationController
   end
 
   def today_jobs 
-    todays_jobs = Job.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).all.order('created_at DESC').page(params[:page] ? params[:page].to_i : 1).per(10)
+    todays_jobs = Job.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, vtc_id: params[:vtc_id]).all.order('created_at DESC').page(params[:page] ? params[:page].to_i : 1).per(10)
     
     # paginate json: todays_jobs, per_page: 10
-    render json: {objects: ActiveModel::Serializer::CollectionSerializer.new(todays_jobs, each_serializer: V1::JobSerializer), meta: pagination_meta(todays_jobs)}
+    render json: {objects: ActiveModel::Serializer::CollectionSerializer.new(todays_jobs, serializer: V1::JobSerializer), meta: pagination_meta(todays_jobs)}, status: 200
   end
 
   def daily_statistics
-    todays_jobs = Job.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).all
+    todays_jobs = Job.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, vtc_id: params[:vtc_id]).all
     money_earned = 0
     jobs_completed = todays_jobs.length
     km_driven = 0
@@ -48,7 +48,11 @@ class V1::JobsController < ApplicationController
       km_driven += job.km_driven
       damages_sum += job.damage
     end
-    avg_damage = damages_sum / jobs_completed
+    if jobs_completed == 0
+      avg_damage = 0
+    else
+      avg_damage = damages_sum / jobs_completed
+    end    
     data = { 
       "jobs_completed": jobs_completed,
       "km_driven": km_driven,
@@ -57,6 +61,38 @@ class V1::JobsController < ApplicationController
     }
 
     render json: data, status: 200
+  end
+
+  def all_time_statistics
+    all_time_jobs = Job.where(vtc_id: params[:vtc_id]).all
+    money_earned = 0
+    jobs_completed = all_time_jobs.length
+    km_driven = 0
+    damages_sum = 0
+    all_time_jobs.each do |job|
+      money_earned += job.money_made
+      km_driven += job.km_driven
+      damages_sum += job.damage
+    end
+    if jobs_completed == 0
+      avg_damage = 0
+    else
+      avg_damage = damages_sum / jobs_completed
+    end    
+    data = { 
+      "jobs_completed": jobs_completed,
+      "km_driven": km_driven,
+      "money_earned": money_earned,
+      "average_damage": avg_damage
+    }
+
+    render json: data, status: 200
+  end
+
+  def vtc_jobs
+    vtc_jobs = Job.where(vtc_id: params[:vtc_id]).all.order("created_at DESC").page(params[:page] ? params[:page].to_i : 1).per(10)
+
+    render json: {objects: ActiveModel::Serializer::CollectionSerializer.new(vtc_jobs, serializer: V1::JobSerializer), meta: pagination_meta(vtc_jobs)}, status: 200
   end
 
   private

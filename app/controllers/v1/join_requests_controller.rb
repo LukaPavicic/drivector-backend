@@ -3,27 +3,32 @@ class V1::JoinRequestsController < ApplicationController
     join_request = JoinRequest.new(join_request_params)
     join_request.user = @current_user
     user_active_requests = JoinRequest.where(user_id: @current_user.id, status: 0).all
+    existing_join = UserJoinedVtc.find_by(user_id: @current_user.id)
     same_request = JoinRequest.where(user_id: @current_user, vtc_id: params[:join_request][:vtc_id]).first
-    if user_active_requests.length == 0
-      if same_request.present?
-        if same_request.can_submit_again?
+    if !existing_join.present?
+      if user_active_requests.length == 0
+        if same_request.present?
+          if same_request.can_submit_again?
+            if join_request.save && join_request.valid?
+              render json: join_request, status: 201
+            else
+              render json: join_request.errors.full_messages, status: 400
+            end
+          else
+            render json: {"message": "You already sent a request to this VTC in the past 7 days."}, status: 400
+          end
+        else
           if join_request.save && join_request.valid?
             render json: join_request, status: 201
           else
             render json: join_request.errors.full_messages, status: 400
           end
-        else
-          render json: {"message": "You already sent a request to this VTC in the past 7 days."}, status: 400
         end
       else
-        if join_request.save && join_request.valid?
-          render json: join_request, status: 201
-        else
-          render json: join_request.errors.full_messages, status: 400
-        end
+        render json: {"message": "You already have an active join request."}, status: 200
       end
     else
-      render json: {"message": "You already have an active join request."}, status: 200
+      render json: { "message": "You are already in a VTC. If you want to join another one, leave the current one first." }, status: 400
     end
   end
 
