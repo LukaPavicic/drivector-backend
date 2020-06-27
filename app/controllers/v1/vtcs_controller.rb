@@ -9,7 +9,7 @@ class V1::VtcsController < ApplicationController
 
   def create
     vtc = Vtc.new(vtc_params)
-    vtc.user_id = @current_user.id
+    vtc.user_id = @current_user.id    
     vtc.pricing_plan = @current_user.subscription_type
     if @current_user.subscription_type == 0
       vtc.maximum_amount_of_users = 10
@@ -64,7 +64,7 @@ class V1::VtcsController < ApplicationController
 
   private
   def vtc_params
-    params.require(:vtc).permit(:id, :name, :description, :minimum_age_to_join, :main_color)
+    params.require(:vtc).permit(:id, :name, :description, :minimum_age_to_join, :main_color, :image)
   end
 
   def vtc_socials_params

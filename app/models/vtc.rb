@@ -9,6 +9,8 @@ class Vtc < ApplicationRecord
   validates :pricing_plan, presence: true
   validates :user_id, presence: true, uniqueness: true
 
+  has_one_attached :image
+
   def increase_money_made(amount)
     self.money_made += amount
   end

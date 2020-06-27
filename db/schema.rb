@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_26_212752) do
+ActiveRecord::Schema.define(version: 2020_06_10_173343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,19 @@ ActiveRecord::Schema.define(version: 2020_03_26_212752) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "card_brand"
     t.index ["stripe_id"], name: "index_charges_on_stripe_id", unique: true
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title", default: "", null: false
+    t.text "description", default: "", null: false
+    t.datetime "start_time", null: false
+    t.bigint "user_id"
+    t.bigint "vtc_id"
+    t.string "start_city", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
+    t.index ["vtc_id"], name: "index_events_on_vtc_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -136,6 +149,8 @@ ActiveRecord::Schema.define(version: 2020_03_26_212752) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "users"
+  add_foreign_key "events", "vtcs"
   add_foreign_key "jobs", "users"
   add_foreign_key "jobs", "vtcs"
   add_foreign_key "join_requests", "users"

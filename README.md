@@ -1,24 +1,19 @@
-# README
+# Drivector 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Drivector is a virtual trucking company management tool for ETS2 and ATS.
 
-Things you may want to cover:
+![drivector logo](logogreenwide.png)
 
-* Ruby version
+## Main Features
+- Monthly Payments
+- User login and registration
+- Authorization
+- Event creation
+- Job logging
+- Statistics
+- Company customization
+- Roles
 
-* System dependencies
+and more to come...
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

@@ -58,8 +58,20 @@ class V1::JoinRequestsController < ApplicationController
     end
   end
 
+  def retrieve_for_user
+    join_requests = JoinRequest.where(user_id: @current_user.id).all.order("created_at DESC").page(params[:page] ? params[:page].to_i : 1).per(10)
+
+    render json: {objects: ActiveModel::Serializer::CollectionSerializer.new(join_requests, serializer: V1::JoinRequestSerializer), meta: pagination_meta(join_requests)}, status: 200
+  end
+
   private
   def join_request_params
     params.require(:join_request).permit(:id, :vtc_id, :motivation_text)
+  end
+
+  def pagination_meta(object)
+    {
+      total_pages: object.total_pages
+    }
   end
 end

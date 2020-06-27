@@ -14,9 +14,10 @@ class AccessToken
     end
 
     def get_user_from_token(token)
+      exceptions = [JWT::VerificationError, JWT::VerificationError]
       begin
         response = self.decode(token)
-      rescue JWT::VerificationError
+      rescue *exceptions
         return nil
       end
       payload = response[0]
