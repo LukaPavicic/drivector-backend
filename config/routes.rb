@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     get 'join_requests/user_requests', to: "join_requests#retrieve_for_user"
     # Events
     post 'events/create', to: "events#create"
+    get 'events/vtc_events', to: "events#vtc_events"
   end
 
   namespace :v1 do

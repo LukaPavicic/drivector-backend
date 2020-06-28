@@ -14,7 +14,7 @@ class AccessToken
     end
 
     def get_user_from_token(token)
-      exceptions = [JWT::VerificationError, JWT::VerificationError]
+      exceptions = [JWT::VerificationError, JWT::ExpiredSignature]
       begin
         response = self.decode(token)
       rescue *exceptions
